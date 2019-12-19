@@ -1,11 +1,25 @@
 document.addEventListener('DOMContentLoaded', ()=>{
     console.log("you are here")
-    testFetch()
+    subjectsFetch()
+    questionsFetch()
+    gameSessions()
 })
 
 
-function testFetch(){
+function subjectsFetch(){
     fetch('http://localhost:3000/subjects')
     .then(response => response.json())
-    .then(tests => console.log(tests))
+    .then(tests => {debugger})
+}
+
+function questionsFetch(){
+    fetch('http://localhost:3000/questions')
+    .then(response => response.json())
+    .then(questions => { })
+}
+
+function gameSessions(){
+    fetch('http://localhost:3000/game_sessions')
+    .then(response => response.json())
+    .then(games => {})
 }
