@@ -1,3 +1,4 @@
+
 function fetchRiddles(name){
 
     let counter = 1
@@ -5,6 +6,8 @@ function fetchRiddles(name){
 
      fetch('http://localhost:3000/subjects/11')
      .then(response => response.json())
-     .then(subject  => displayRiddles(subject, counter, level, name))
+     .then(subject  => displayQuestions(subject, counter, level, name))
      
  }
+
+ 
