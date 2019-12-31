@@ -63,8 +63,9 @@
     place-items: center;
     height: 20vh;
     width: 50vh;
-    margin-top: 200px;
-    margin-right:100px;
+    margin-top: 100px;
+    margin-right:50px;
+    margin-left: 60px;
     background-color: #00ace6; 
     border: none;
     color: white;
@@ -83,7 +84,7 @@
   place-items: center;
   height: 20vh;
   width: 50vh;
-  margin-right:100px;
+  margin-right:50px;
   background-color: #00ace6; 
   border: none;
   color: white;
@@ -103,7 +104,7 @@
   place-items: center;
   height: 20vh;
   width: 50vh;
-  margin-right:100px;
+  margin-right: 80px;
   background-color: #00ace6; 
   border: none;
   color: white;
@@ -130,18 +131,17 @@
     font-size: 35px;
     animation: animatethree 2s linear infinite;
   }
-  /* #particles-js {
-   height: 100%;
-   background: black;
-  }
-   */
+
   
   .arrow {
-transform: rotate(90deg);
-animation: MoveUpDown 1s linear infinite;
-position: relative;
-left: 0;
-bottom: 0;
+
+    margin-top: 10px;
+    transform: rotate(90deg);
+    animation: MoveUpDown 1s linear infinite;
+    position: relative;
+    left: 0;
+    bottom: 0;
+
 }
 
 @keyframes MoveUpDown {
@@ -200,6 +200,33 @@ h3 {
 }
 
 #youLose{
+  margin-top: 10%;
+  text-align: center;
+  font-family: 'Permanent Marker';
+  font-size: 90px;
+}
+
+#newPlayer {
+
+  padding: 10px 15px;
+  font-family: 'Permanent Marker';
+  font-size: 40px;
+
+}
+
+#tryAgain{
+  
+  margin-left: 33%;
+  margin-right: 20px; 
+  padding: 10px 15px;
+  place-items: center;
+  font-family: 'Permanent Marker';
+  font-size: 40px;
+
+}
+
+#youWin{
+  margin-top: 10%;
   text-align: center;
   font-family: 'Permanent Marker';
   font-size: 90px;

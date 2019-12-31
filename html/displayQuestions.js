@@ -1,5 +1,5 @@
 function displayQuestions(subject, counter, level, name){
-     
+
     if(document.querySelector('#buttons') !== null){
        document.querySelector('#buttons').remove()
     } else {

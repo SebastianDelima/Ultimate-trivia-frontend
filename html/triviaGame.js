@@ -5,9 +5,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
     
 })
 
-function welcomePage(gameOverH1){
+function welcomePage(gameOverH1, tryAgainButton, newPlayerButton){
 
-if(gameOverH1 !== undefined) {gameOverH1.remove()}
+if(gameOverH1 !== undefined) {
+
+    gameOverH1.remove() 
+    tryAgainButton.remove()
+    newPlayerButton.remove()
+}
 
     let body             = document.querySelector('body')
     let welcomeDiv       = document.createElement('div')
@@ -48,8 +53,14 @@ if(gameOverH1 !== undefined) {gameOverH1.remove()}
 
 
 
-function startGame(welcomeDiv, name){
+function startGame(welcomeDiv, name, tryAgainButton, newPlayerButton){
+    
+    if (tryAgainButton !== undefined){
 
+        tryAgainButton.remove()
+        newPlayerButton.remove()
+        welcomeDiv.remove()
+    }
     welcomeDiv.remove()
    
     let body                 = document.querySelector('body')
@@ -78,16 +89,18 @@ function startGame(welcomeDiv, name){
     buttonRiddles.addEventListener('click',() => {fetchRiddles(name)})
     buttonEntertainment.addEventListener('click',() => {fetchEntertainment(name)})
 
-   
-  
 }
 
 
 function win(subject, counter, level){
     ++counter
     ++level
-    displayHistoryQuestions(subject, counter, level)
+    if (subject.questions.length < counter){
+        winner()
+    } else {
+    displayQuestions(subject, counter, level)
     console.log('you win!')
+    }
 }
 
 
@@ -103,18 +116,17 @@ function lose(subject, counter, name){
     let body             = document.querySelector('body')
 
     gameOverH1.innerText      = 'You lose!'
-    newPlayerButton.innerText = 'New player'
+    newPlayerButton.innerText = "New Player"
     tryAgainButton.innerText  = 'Try again'
 
-    body.appendChild(gameOverH1)
-    gameOverH1.append(tryAgainButton, newPlayerButton)
+    body.append(gameOverH1, tryAgainButton, newPlayerButton)
 
     gameOverH1.setAttribute('id', 'youLose')
     newPlayerButton.setAttribute('id', 'newPlayer')
     tryAgainButton.setAttribute('id','tryAgain')
 
-    tryAgainButton.addEventListener('click',() => startGame(gameOverH1, name))
-    newPlayerButton.addEventListener('click', () => welcomePage(gameOverH1))
+    tryAgainButton.addEventListener('click',() => startGame(gameOverH1,name, tryAgainButton, newPlayerButton))
+    newPlayerButton.addEventListener('click', () => welcomePage(gameOverH1, tryAgainButton, newPlayerButton))
 
     let id = subject.id
 
@@ -138,5 +150,30 @@ function lose(subject, counter, name){
     fetch('http://localhost:3000/game_sessions', objectConfig)
     .then(response => response.json())
     .then(data =>  {console.log(data)})
+}
+
+function winner(){
+
+    document.querySelector('#timer').remove()
+    document.querySelector('#question-div').remove()
+
+     let winSign = document.createElement('h1')
+     let newPlayerButton  = document.createElement('button')
+     let tryAgainButton   = document.createElement('button')
+     let body             = document.querySelector('body')
+
+
+     winSign.innerText = "You Win! call 1-800-1234 for your prize!"
+     newPlayerButton.innerText = "New Player"
+     tryAgainButton.innerText  = 'Try again'
+
+     winSign.setAttribute('id', 'youWin')
+     newPlayerButton.setAttribute('id', 'newPlayer')
+     tryAgainButton.setAttribute('id','tryAgain')
+
+     body.append(winSign, tryAgainButton, newPlayerButton)
+
+     tryAgainButton.addEventListener('click',() => startGame(winSign, name, tryAgainButton, newPlayerButton))
+     newPlayerButton.addEventListener('click', () => welcomePage(winSign, tryAgainButton, newPlayerButton))
 }
    
