@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     
 })
 
+
 function welcomePage(gameOverH1, tryAgainButton, newPlayerButton){
 
 if(gameOverH1 !== undefined) {
@@ -92,13 +93,13 @@ function startGame(welcomeDiv, name, tryAgainButton, newPlayerButton){
 }
 
 
-function win(subject, counter, level){
+function win(subject, counter, level, name){
     ++counter
     ++level
     if (subject.questions.length < counter){
         winner()
     } else {
-    displayQuestions(subject, counter, level)
+    displayQuestions(subject, counter, level, name)
     console.log('you win!')
     }
 }
@@ -149,7 +150,28 @@ function lose(subject, counter, name){
   
     fetch('http://localhost:3000/game_sessions', objectConfig)
     .then(response => response.json())
-    .then(data =>  {console.log(data)})
+
+    // fetch('http://localhost:3000/game_sessions')
+    // .then(response => response.json())
+    // .then(gameStats => displayLeaderboard(gameStats))
+}
+
+function displayLeaderboard(gameStats){
+
+
+    let body = document.querySelector('body')
+    let leaderboardDiv = document.createElement('div')
+    let listTitle = document.createElement('h1')
+    let orderedList = document.createElement('ol')
+    let listItem   = document.createElement('li') 
+    
+    body.append(leaderboardDiv)
+    leaderboardDiv.append(listTitle, orderedList)
+    orderedList.appendChild(listItem)
+
+    listTitle.innerText = "Leaderboard"
+    // listItem.innerText  = `${gameStats.name}  Level:${gameStats.score}`
+
 }
 
 function winner(){
@@ -165,7 +187,7 @@ function winner(){
 
      winSign.innerText = "You Win! call 1-800-1234 for your prize!"
      newPlayerButton.innerText = "New Player"
-     tryAgainButton.innerText  = 'Try again'
+     tryAgainButton.innerText  = 'Play again'
 
      winSign.setAttribute('id', 'youWin')
      newPlayerButton.setAttribute('id', 'newPlayer')

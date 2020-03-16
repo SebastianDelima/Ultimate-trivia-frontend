@@ -4,7 +4,7 @@ function fetchRiddles(name){
     let counter = 1
     let level = 0
 
-     fetch('http://localhost:3000/subjects/11')
+     fetch('http://localhost:3000/subjects/2')
      .then(response => response.json())
      .then(subject  => displayRiddles(subject, counter, level, name))
      
@@ -63,9 +63,9 @@ function fetchRiddles(name){
             ans2Node.setAttribute('id', 'ans2')
             ans3Node.setAttribute('id', 'ans3')
 
-            ans1Node.addEventListener('click',() => { if(question1Correct === true){clearInterval(timer), win(subject, counter, level)}else{clearInterval(timer),lose(subject, counter, name)}})
-            ans2Node.addEventListener('click',() => { if(question2Correct === true){clearInterval(timer), win(subject, counter, level)}else{clearInterval(timer),lose(subject, counter, name)}})
-            ans3Node.addEventListener('click',() => { if(question3Correct === true){clearInterval(timer), win(subject, counter, level)}else{clearInterval(timer),lose(subject, counter, name)}})
+            ans1Node.addEventListener('click',() => { if(question1Correct === true){clearInterval(timer), winRiddle(subject, counter, level)}else{clearInterval(timer),loseRiddle(subject, counter, name)}})
+            ans2Node.addEventListener('click',() => { if(question2Correct === true){clearInterval(timer), winRiddle(subject, counter, level)}else{clearInterval(timer),loseRiddle(subject, counter, name)}})
+            ans3Node.addEventListener('click',() => { if(question3Correct === true){clearInterval(timer), winRiddle(subject, counter, level)}else{clearInterval(timer),loseRiddle(subject, counter, name)}})
         
             levelCounter.innerText     = `Question: ${counter}`
             timerTitle.innerText       = 'Timer'
@@ -88,3 +88,65 @@ function fetchRiddles(name){
 }
 
  
+function winRiddle(subject, counter, level, name){
+    ++counter
+    ++level
+    if (subject.questions.length < counter){
+        winner()
+    } else {
+    displayRiddles(subject, counter, level, name)
+    console.log('you win!')
+    }
+}
+
+function loseRiddle(subject, counter, name){
+
+    console.log('You lose')
+
+    document.querySelector('#timer').remove()
+    document.querySelector('#question-div').remove()
+
+    let gameOverH1       = document.createElement('h1')
+    let newPlayerButton  = document.createElement('button')
+    let tryAgainButton   = document.createElement('button')
+    let body             = document.querySelector('body')
+
+    gameOverH1.innerText      = 'You lose!'
+    newPlayerButton.innerText = "New Player"
+    tryAgainButton.innerText  = 'Try again'
+
+    body.append(gameOverH1, tryAgainButton, newPlayerButton)
+
+    gameOverH1.setAttribute('id', 'youLose')
+    newPlayerButton.setAttribute('id', 'newPlayer')
+    tryAgainButton.setAttribute('id','tryAgain')
+
+    tryAgainButton.addEventListener('click',() => startGame(gameOverH1,name, tryAgainButton, newPlayerButton))
+    newPlayerButton.addEventListener('click', () => welcomePage(gameOverH1, tryAgainButton, newPlayerButton))
+
+    let id = subject.id
+
+    let objectConfig = {
+        method:"POST",
+        headers: {
+
+            'Content-Type': 'application/json',
+            "Accept": 'application/json'
+
+        },
+        body: JSON.stringify({
+            
+            score: counter,
+             name: name,
+            subject_id: id
+
+        })
+    }
+  
+    fetch('http://localhost:3000/game_sessions', objectConfig)
+    .then(response => response.json())
+
+    // fetch('http://localhost:3000/game_sessions')
+    // .then(response => response.json())
+    // .then(gameStats => displayLeaderboard(gameStats))
+}

@@ -51,9 +51,9 @@ function displayQuestions(subject, counter, level, name){
             ans2Node.setAttribute('id', 'ans2')
             ans3Node.setAttribute('id', 'ans3')
 
-            ans1Node.addEventListener('click',() => { if(question1Correct === true){clearInterval(timer), win(subject, counter, level)}else{clearInterval(timer),lose(subject, counter, name)}})
-            ans2Node.addEventListener('click',() => { if(question2Correct === true){clearInterval(timer), win(subject, counter, level)}else{clearInterval(timer),lose(subject, counter, name)}})
-            ans3Node.addEventListener('click',() => { if(question3Correct === true){clearInterval(timer), win(subject, counter, level)}else{clearInterval(timer),lose(subject, counter, name)}})
+            ans1Node.addEventListener('click',() => { if(question1Correct === true){clearInterval(timer), win(subject, counter, level, name)}else{clearInterval(timer),lose(subject, counter, name)}})
+            ans2Node.addEventListener('click',() => { if(question2Correct === true){clearInterval(timer), win(subject, counter, level, name)}else{clearInterval(timer),lose(subject, counter, name)}})
+            ans3Node.addEventListener('click',() => { if(question3Correct === true){clearInterval(timer), win(subject, counter, level, name)}else{clearInterval(timer),lose(subject, counter, name)}})
         
             levelCounter.innerText     = `Question: ${counter}`
             timerTitle.innerText       = 'Timer'
