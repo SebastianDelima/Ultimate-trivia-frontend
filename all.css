@@ -57,6 +57,7 @@
   }
 
   #history-button {
+    border-radius: 25px;
     font-family: 'Permanent Marker';
     text-align: center;
     display: grid;
@@ -78,6 +79,7 @@
   }
 
 #riddle-button{
+  border-radius: 25px;
   font-family: 'Permanent Marker';
   text-align: center;
   display: grid;
@@ -97,6 +99,7 @@
 }
 
 #entertainment-button{
+  border-radius: 25px;
   margin-top: 30px;
   font-family: 'Permanent Marker';
   text-align: center;
