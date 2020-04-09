@@ -244,9 +244,10 @@ h3 {
 }
 }
 
-
 @keyframes animate{ 
+
   50%, 50%
+
   {
   color: #ff1a66;
   text-shadow: 0 0 50px rgb(0, 195, 255),
@@ -264,13 +265,13 @@ h3 {
 
 
 @keyframes animatethree{ 
+
   5%, 95%
+
   {
   color: #b001f5;
   box-shadow: 0 0 50px;
        
-
-  
   };
  
   50%, 50%
@@ -282,8 +283,10 @@ h3 {
 
 
 @keyframes animatefour{ 
+
   5%, 95%
   {
+
   color: #0105f5;
   box-shadow: 0 0 50px;
        
